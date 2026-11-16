@@ -124,11 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Обновление слотов при смене даты в основной форме
   if (bookingDateInput && timeSlotSelect) {
-    bookingDateInput.addEventListener('change', () => {
-      fetchAndApplyBusySlots(bookingDateInput.value, timeSlotSelect);
-      if (modalDateInput) modalDateInput.value = bookingDateInput.value;
-      if (modalTimeSlotSelect) fetchAndApplyBusySlots(bookingDateInput.value, modalTimeSlotSelect);
-    });
+    const onDateChange = () => {
+      const val = bookingDateInput.value;
+      if (val) {
+        fetchAndApplyBusySlots(val, timeSlotSelect);
+        if (modalDateInput) modalDateInput.value = val;
+        if (modalTimeSlotSelect) fetchAndApplyBusySlots(val, modalTimeSlotSelect);
+      }
+    };
+    bookingDateInput.addEventListener('change', onDateChange);
+    bookingDateInput.addEventListener('input', onDateChange);
 
     // Загрузка слотов для сегодняшней даты по умолчанию
     fetchAndApplyBusySlots(todayStr, timeSlotSelect);
@@ -136,11 +141,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Обновление слотов при смене даты в модальной форме
   if (modalDateInput && modalTimeSlotSelect) {
-    modalDateInput.addEventListener('change', () => {
-      fetchAndApplyBusySlots(modalDateInput.value, modalTimeSlotSelect);
-      if (bookingDateInput) bookingDateInput.value = modalDateInput.value;
-      if (timeSlotSelect) fetchAndApplyBusySlots(modalDateInput.value, timeSlotSelect);
-    });
+    const onModalDateChange = () => {
+      const val = modalDateInput.value;
+      if (val) {
+        fetchAndApplyBusySlots(val, modalTimeSlotSelect);
+        if (bookingDateInput) bookingDateInput.value = val;
+        if (timeSlotSelect) fetchAndApplyBusySlots(val, timeSlotSelect);
+      }
+    };
+    modalDateInput.addEventListener('change', onModalDateChange);
+    modalDateInput.addEventListener('input', onModalDateChange);
 
     fetchAndApplyBusySlots(todayStr, modalTimeSlotSelect);
   }
@@ -346,7 +356,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (err) err.textContent = 'Выберите удобный свободный интервал';
     }
 
-    if (!isValid) return;
+    // Строгая проверка: ни одно из 6 полей не должно быть пустым
+    if (!isValid || !name || !phone || !carModel || !workVolume || !bookingDate || !timeSlot) {
+      return;
+    }
 
     // 2. Проверка Honeypot ловушки от ботов
     if (honeypotInput && honeypotInput.value.trim() !== '') {
@@ -354,8 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // 3. Структурированный JSON по спецификации:
-    // { "name": имя, "phone": телефон, "car": марка_и_модель, "service": объём_работ, "date": выбранная_дата, "time": выбранный_слот }
+    // 3. Структурированный JSON СТРОГО из 6 отдельных полей (без склеек в service):
     const payload = {
       name: name,
       phone: phone,
@@ -364,6 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
       date: bookingDate,
       time: timeSlot
     };
+
+    console.log('[АВТОЛОСК] Отправка заявки:', payload);
 
     // Блокировка кнопки на время отправки
     const btnTextEl = submitBtn ? submitBtn.querySelector('.btn-text') : null;
