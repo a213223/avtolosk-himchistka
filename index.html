@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Студия профессиональной химчистки и детейлинга салонов «АВТОЛОСК» в Москве. Глубокая очистка кожи, алькантары, текстиля с гарантией сушки турбофенами за 6 часов.">
+  <meta name="theme-color" content="#F4F5F7">
+
+  <title>АВТОЛОСК // Профессиональная химчистка и детейлинг салона авто в Москве</title>
+
+  <!-- Google Fonts: Space Grotesk (700/800), Inter (400/500/600), JetBrains Mono (400/500/700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Relative stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111827' rx='4'/%3E%3Cpath d='M6 22l4-12h12l4 12H6z' fill='none' stroke='%23D97706' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='11' cy='22' r='2' fill='%23F4F5F7'/%3E%3Ccircle cx='21' cy='22' r='2' fill='%23F4F5F7'/%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- Верхняя техническая статус-панель -->
+  <div class="top-status-bar">
+    <div class="container status-bar-inner">
+      <div class="status-item">
+        <span class="status-indicator"></span>
+        <span class="mono-badge">БОКС-01 // МОСКВА, ЮАО</span>
+      </div>
+      <div class="status-item hide-mobile">
+        <span class="mono-text">СУШКА: ТУРБОФЕНЫ 70°C // ОСТАТОЧНАЯ ВЛАЖНОСТЬ: 0.0%</span>
+      </div>
+      <div class="status-item">
+        <span class="mono-text text-amber">СВОБОДНЫЕ СЛОТЫ НА ЭТУ НЕДЕЛЮ: ЕСТЬ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Шапка сайта -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="./" class="brand-logo" aria-label="АВТОЛОСК Главная">
+        <span class="brand-name">АВТОЛОСК</span>
+        <span class="brand-tag">// ХИМЧИСТКА</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="#pricing" class="nav-link">Прайс и пакеты</a></li>
+          <li><a href="#process" class="nav-link">Этапы работы</a></li>
+          <li><a href="#gallery" class="nav-link">Примеры</a></li>
+          <li><a href="#booking" class="nav-link">Запись</a></li>
+          <li><a href="#contacts" class="nav-link">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-phone-block">
+          <a href="tel:+74958421930" class="header-phone">+7 (495) 842-19-30</a>
+          <span class="header-hours">Ежедневно 09:00–21:00</span>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm header-cta-btn" id="openModalBtn">
+          Рассчитать и записаться
+        </button>
+
+        <!-- Мобильная кнопка меню -->
+        <button type="button" class="mobile-toggle" id="mobileMenuToggle" aria-label="Открыть навигационное меню" aria-expanded="false" aria-controls="navMenu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Первый экран (Hero) -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Левая колонка: Текст и параметры -->
+          <div class="hero-content">
+            <div class="technical-stamp">
+              <span class="stamp-prefix">[РЕГЛАМЕНТ]</span>
+              <span class="stamp-code">DETAILING-SPEC // 2026</span>
+            </div>
+
+            <h1 class="hero-title">
+              Глубокая химчистка и дезинфекция салона авто с гарантией полной сушки за 6 часов
+            </h1>
+
+            <p class="hero-lead">
+              Инженерный подход к уходу за интерьером: удаление въевшихся пятен, запахов и органики без риска намокания проводки и деформации кожи.
+            </p>
+
+            <!-- 3 конкретных технических факта -->
+            <ul class="hero-specs-list" aria-label="Технические преимущества">
+              <li class="spec-item">
+                <div class="spec-number">01</div>
+                <div class="spec-body">
+                  <strong>Безопасная гипоаллергенная химия без запаха</strong>
+                  <span>Премиальные сертифицированные составы Koch Chemie (Германия) и LeTech (Великобритания), полностью нейтральные для детей и животных.</span>
+                </div>
+              </li>
+              <li class="spec-item">
+                <div class="spec-number">02</div>
+                <div class="spec-body">
+                  <strong>Бережная чистка деликатной кожи и алькантары</strong>
+                  <span>Прецизионная очистка пор от жировых отложений с консервацией естественного заводского матового покрытия.</span>
+                </div>
+              </li>
+              <li class="spec-item">
+                <div class="spec-number">03</div>
+                <div class="spec-body">
+                  <strong>Сушка турбофенами до 0% влажности</strong>
+                  <span>Вы забираете сухой салон без сырости, затхлого запаха и риска образования плесени под напольным ковролином.</span>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Кнопки действий -->
+            <div class="hero-buttons">
+              <a href="#booking" class="btn btn-primary btn-lg">
+                Записаться на химчистку
+              </a>
+              <a href="#pricing" class="btn btn-secondary btn-lg">
+                Смотреть прайс
+              </a>
+            </div>
+          </div>
+
+          <!-- Правая колонка: Фото и техническая плашка -->
+          <div class="hero-visual">
+            <div class="visual-frame">
+              <img 
+                src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80" 
+                alt="Идеально очищенный салон автомобиля в боксе студии АВТОЛОСК" 
+                class="hero-img"
+                loading="eager"
+                width="600"
+                height="450"
+              >
+              <div class="visual-plate">
+                <div class="plate-row">
+                  <span class="plate-label">НОРМАТИВНЫЙ СРОК:</span>
+                  <span class="plate-val">от 4 до 8 часов</span>
+                </div>
+                <div class="plate-row">
+                  <span class="plate-label">ФИНИШНАЯ СУШКА:</span>
+                  <span class="plate-val text-amber">100% (до 0% влаги)</span>
+                </div>
+                <div class="plate-row">
+                  <span class="plate-label">КОНТРОЛЬ КАЧЕСТВА:</span>
+                  <span class="plate-val">Чек-лист 28 пунктов</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Микро-метрики под фото -->
+            <div class="visual-metrics-grid">
+              <div class="metric-card">
+                <span class="metric-num">1 480+</span>
+                <span class="metric-desc">Салонов обслужено с 2019 года</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-num">14 дней</span>
+                <span class="metric-desc">Гарантия на отсутствие разводов</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция: Прайс и пакеты услуг -->
+    <section class="section pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">[СПЕЦИФИКАЦИЯ И ТАРИФЫ]</div>
+          <h2 class="section-title">Таблица пакетов и фиксированных цен</h2>
+          <p class="section-subtitle">
+            Стоимость зафиксирована в заказ-наряде до начала работ. Финишная сушка турбопушками и антистатическая обработка включены во все комплексы.
+          </p>
+        </div>
+
+        <!-- Табличная спецификация пакетов -->
+        <div class="pricing-grid">
+          
+          <!-- Пакет 1: Локальная чистка -->
+          <article class="pricing-card" data-package-name="Локальная чистка (от 2 500 ₽)">
+            <div class="card-header">
+              <span class="card-code">SPEC-01</span>
+              <h3 class="card-title">Локальная химчистка</h3>
+              <p class="card-brief">1–2 проблемных элемента салона на выбор (сиденья, пол или потолок)</p>
+            </div>
+
+            <div class="card-meta">
+              <span class="meta-item"><span class="meta-label">Срок:</span> 1.5–3 ч</span>
+              <span class="meta-item"><span class="meta-label">Сушка:</span> Включена</span>
+            </div>
+
+            <ul class="card-features">
+              <li>Удаление свежих и застарелых пятен (кофе, масло, сладости)</li>
+              <li>Локальная экстракцияSantoemma и щадящая сушка феном</li>
+              <li>Антистатическая обработка зоны очистки</li>
+            </ul>
+
+            <div class="card-footer">
+              <div class="price-block">
+                <span class="price-prefix">от</span>
+                <span class="price-val">2 500 ₽</span>
+              </div>
+              <button type="button" class="btn btn-outline select-package-btn" data-target-package="Локальная чистка (от 2 500 ₽)">
+                Выбрать пакет
+              </button>
+            </div>
+          </article>
+
+          <!-- Пакет 2: Комплекс Стандарт -->
+          <article class="pricing-card" data-package-name="Комплекс Стандарт (от 7 500 ₽)">
+            <div class="card-header">
+              <span class="card-code">SPEC-02</span>
+              <h3 class="card-title">Комплекс «Стандарт»</h3>
+              <p class="card-brief">Базовая основательная чистка салона без демонтажа кресел</p>
+            </div>
+
+            <div class="card-meta">
+              <span class="meta-item"><span class="meta-label">Срок:</span> 4–6 ч</span>
+              <span class="meta-item"><span class="meta-label">Сушка:</span> 100% сухой</span>
+            </div>
+
+            <ul class="card-features">
+              <li>Глубокая химчистка сидений (передние + задний диван)</li>
+              <li>Очистка ковролина, педального узла и дверных карт</li>
+              <li>Чистка багажника, пластика торпедо и консоли</li>
+              <li>Мойка стекол изнутри без разводов</li>
+            </ul>
+
+            <div class="card-footer">
+              <div class="price-block">
+                <span class="price-prefix">от</span>
+                <span class="price-val">7 500 ₽</span>
+              </div>
+              <button type="button" class="btn btn-outline select-package-btn" data-target-package="Комплекс Стандарт (от 7 500 ₽)">
+                Выбрать пакет
+              </button>
+            </div>
+          </article>
+
+          <!-- Пакет 3: Комплекс Полный (АКЦЕНТ) -->
+          <article class="pricing-card card-featured" data-package-name="Полный комплекс + Потолок и озонация (от 11 500 ₽)">
+            <div class="card-featured-badge">
+              <span>ХИТ // ВЫБОР 68% АВТОВЛАДЕЛЬЦЕВ</span>
+            </div>
+
+            <div class="card-header">
+              <span class="card-code text-amber">SPEC-03 // FULL</span>
+              <h3 class="card-title">Комплекс «Полный + Потолок и озонация»</h3>
+              <p class="card-brief">Тотальная глубокая очистка всего интерьера с дезинфекцией</p>
+            </div>
+
+            <div class="card-meta">
+              <span class="meta-item"><span class="meta-label">Срок:</span> 6–8 ч</span>
+              <span class="meta-item"><span class="meta-label">Сушка:</span> 2 турбопушки</span>
+            </div>
+
+            <ul class="card-features">
+              <li>Полный салон: сиденья, пол, двери, ремни безопасности, багажник</li>
+              <li>Деликатная сухая/влажная чистка потолка без риска провисания</li>
+              <li>Продувка и дезинфекция воздуховодов кондиционера</li>
+              <li>Медицинская озонация: уничтожение бактерий и въевшихся запахов</li>
+              <li>Консервация пластика защитным составом с UV-фильтром</li>
+            </ul>
+
+            <div class="card-footer">
+              <div class="price-block">
+                <span class="price-prefix">от</span>
+                <span class="price-val text-amber">11 500 ₽</span>
+              </div>
+              <button type="button" class="btn btn-primary select-package-btn" data-target-package="Полный комплекс + Потолок и озонация (от 11 500 ₽)">
+                Выбрать пакет
+              </button>
+            </div>
+          </article>
+
+          <!-- Пакет 4: Детейлинг уход за кожей -->
+          <article class="pricing-card" data-package-name="Уход за кожей с кондиционером (от 4 500 ₽)">
+            <div class="card-header">
+              <span class="card-code">SPEC-04</span>
+              <h3 class="card-title">Детейлинг-уход за кожей</h3>
+              <p class="card-brief">Профессиональная регенерация и защита кожаной обивки</p>
+            </div>
+
+            <div class="card-meta">
+              <span class="meta-item"><span class="meta-label">Срок:</span> 2.5–4 ч</span>
+              <span class="meta-item"><span class="meta-label">Химия:</span> LeTech UK</span>
+            </div>
+
+            <ul class="card-features">
+              <li>Бережная пенная очистка пор от жира и джинсового красителя</li>
+              <li>Удаление засаленности и возвращение матового блеска</li>
+              <li>Нанесение защитного крема-барьера LeTech Leather Protection</li>
+              <li>Защита от пересыхания, трещин и ультрафиолета на 6 месяцев</li>
+            </ul>
+
+            <div class="card-footer">
+              <div class="price-block">
+                <span class="price-prefix">от</span>
+                <span class="price-val">4 500 ₽</span>
+              </div>
+              <button type="button" class="btn btn-outline select-package-btn" data-target-package="Уход за кожей с кондиционером (от 4 500 ₽)">
+                Выбрать пакет
+              </button>
+            </div>
+          </article>
+
+          <!-- Пакет 5: Предпродажная подготовка -->
+          <article class="pricing-card" data-package-name="Предпродажная подготовка (от 6 500 ₽)">
+            <div class="card-header">
+              <span class="card-code">SPEC-05</span>
+              <h3 class="card-title">Предпродажная подготовка салона</h3>
+              <p class="card-brief">Максимум визуального эффекта и свежести перед показом покупателю</p>
+            </div>
+
+            <div class="card-meta">
+              <span class="meta-item"><span class="meta-label">Срок:</span> 4–5 ч</span>
+              <span class="meta-item"><span class="meta-label">Фокус:</span> Визуал + запах</span>
+            </div>
+
+            <ul class="card-features">
+              <li>Экспресс-химчистка обивки сидений и ковролина</li>
+              <li>Устранение посторонних запахов в салоне</li>
+              <li>Полировка глянцевого пластика, экранов и лакированных вставок</li>
+              <li>Чернение уплотнителей и педального узла</li>
+            </ul>
+
+            <div class="card-footer">
+              <div class="price-block">
+                <span class="price-prefix">от</span>
+                <span class="price-val">6 500 ₽</span>
+              </div>
+              <button type="button" class="btn btn-outline select-package-btn" data-target-package="Предпродажная подготовка (от 6 500 ₽)">
+                Выбрать пакет
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция: Этапы работы -->
+    <section class="section process-section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">[ТЕХНОЛОГИЧЕСКАЯ КАРТА]</div>
+          <h2 class="section-title">4 строгих этапа химчистки по регламенту</h2>
+          <p class="section-subtitle">
+            Каждый автомобиль проходит фиксированный технологический цикл. Мы не экономим время на промывке экстрактором и сушке.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <!-- Шаг 01 -->
+          <div class="process-card">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <h3 class="step-title">Осмотр и тест материалов</h3>
+              <p class="step-desc">
+                Мастер осматривает салон с инспекционным светом, выявляет характер загрязнений (кофе, масла, белок, соли). Проводит тест на стойкость красителя кожи и волокон текстиля в незаметном месте.
+              </p>
+              <div class="step-spec">
+                <span>ИНСТРУМЕНТ:</span> Инспекционный LED-фонарь, тест pH
+              </div>
+            </div>
+          </div>
+
+          <!-- Шаг 02 -->
+          <div class="process-card">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <h3 class="step-title">Деликатная чистка паром и экстрактором</h3>
+              <p class="step-desc">
+                Нанесение активной пены, расщепляющей грязь без переувлажнения наполнителя сидений. Глубокое промывание пор и волокон экстрактором Santoemma под давлением 4 бар чистой водой с нейтрализатором.
+              </p>
+              <div class="step-spec">
+                <span>ИНСТРУМЕНТ:</span> Экстрактор Santoemma Sabrina, Tornador Z-020
+              </div>
+            </div>
+          </div>
+
+          <!-- Шаг 03 -->
+          <div class="process-card">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <h3 class="step-title">Сушка салона турбопушками</h3>
+              <p class="step-desc">
+                Установка профессиональных автофенов с направленным потоком нагретого до 55°C сухого воздуха. Полное принудительное испарение остаточной влаги из ковролина и сидений за 2–3 часа.
+              </p>
+              <div class="step-spec">
+                <span>РЕЗУЛЬТАТ:</span> 0.0% влажности, отсутствие конденсата
+              </div>
+            </div>
+          </div>
+
+          <!-- Шаг 04 -->
+          <div class="process-card">
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <h3 class="step-title">Озонация и контроль качества</h3>
+              <p class="step-desc">
+                Генерация озона в закрытом салоне при работающей рециркуляции климата. Полное уничтожение спор бактерий, плесени и табачного дыма. Финальная приёмка старшим мастером по чек-листу из 28 пунктов.
+              </p>
+              <div class="step-spec">
+                <span>РЕГЛАМЕНТ:</span> Озонатор 15 г/ч + чек-лист мастера
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция: Примеры работ -->
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-tag">[ФОТООТЧЁТ ИЗ БОКСА]</div>
+          <h2 class="section-title">Результаты глубокой химчистки</h2>
+          <p class="section-subtitle">
+            Реальные примеры очистки кожаных и текстильных салонов. Заводская текстура без жирного глянца и химии.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" 
+              alt="Очистка панели приборов и рулевого колеса в детейлинг студии" 
+              class="gallery-img"
+              loading="lazy"
+              width="400"
+              height="300"
+            >
+            <figcaption class="gallery-caption">
+              <span class="caption-tag">ПОРШЕ 911 // КОКПИТ</span>
+              <span class="caption-desc">Очистка торпедо, матовой кожи и воздуховодов</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" 
+              alt="Деликатная очистка кожи руля и центральной консоли автомобиля" 
+              class="gallery-img"
+              loading="lazy"
+              width="400"
+              height="300"
+            >
+            <figcaption class="gallery-caption">
+              <span class="caption-tag">БМВ 5 СЕРИИ // РУЛЬ И ПЕРФОРАЦИЯ</span>
+              <span class="caption-desc">Удаление засаленности и консервация кремом LeTech</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" 
+              alt="Химчистка кожаных сидений автомобиля" 
+              class="gallery-img"
+              loading="lazy"
+              width="400"
+              height="300"
+            >
+            <figcaption class="gallery-caption">
+              <span class="caption-tag">СПОРТИВНЫЕ СИДЕНЬЯ // КОЖА</span>
+              <span class="caption-desc">Очистка перфорации, строчки и боковых валиков</span>
+            </figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img 
+              src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80" 
+              alt="Процесс детейлинг очистки и дезинфекции автомобиля" 
+              class="gallery-img"
+              loading="lazy"
+              width="400"
+              height="300"
+            >
+            <figcaption class="gallery-caption">
+              <span class="caption-tag">ЭКСТРАКЦИЯ И ДЕЗИНФЕКЦИЯ</span>
+              <span class="caption-desc">Удаление пятен и сушка турбофенами за 2 часа</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Секция: Онлайн-запись и расчёт стоимости -->
+    <section class="section booking-section" id="booking">
+      <div class="container">
+        <div class="booking-wrapper">
+          
+          <!-- Левая информационная часть -->
+          <div class="booking-info">
+            <div class="section-tag">[ОНЛАЙН-РЕЗЕРВ БОКСА]</div>
+            <h2 class="booking-title">Запись на химчистку с гарантией брони слота</h2>
+            <p class="booking-desc">
+              Заполните параметры автомобиля. Мастер рассчитает точное время, зарезервирует теплый сушильный бокс и свяжется с вами в течение 10 минут.
+            </p>
+
+            <div class="booking-guarantees">
+              <div class="guarantee-item">
+                <span class="guarantee-icon">✓</span>
+                <div>
+                  <strong>Без скрытых доплат:</strong> стоимость подтверждается до приемки автомобиля в работу.
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <span class="guarantee-icon">✓</span>
+                <div>
+                  <strong>Сухой салон к назначенному часу:</strong> задержки исключены благодаря 2 турбофенам.
+                </div>
+              </div>
+              <div class="guarantee-item">
+                <span class="guarantee-icon">✓</span>
+                <div>
+                  <strong>Охраняемая парковка:</strong> автомобиль находится в теплом закрытом боксе под видеонаблюдением.
+                </div>
+              </div>
+            </div>
+
+            <div class="direct-messengers-box">
+              <span class="messengers-caption">Или отправьте фото салона для экспресс-оценки:</span>
+              <div class="messengers-buttons">
+                <a href="https://t.me/avtolosk" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                  Telegram диалог
+                </a>
+                <a href="https://wa.me/74958421930" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                  WhatsApp чат
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Правая часть: Инженерная форма записи -->
+          <div class="booking-form-container">
+            <form id="mainBookingForm" class="booking-form" novalidate>
+              
+              <!-- Honeypot спам-ловушка (боты заполнят, люди не увидят) -->
+              <input type="text" name="website" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+              <div class="form-header">
+                <span class="form-title">Параметры заказ-наряда</span>
+                <span class="form-badge">Шаг 1 из 1</span>
+              </div>
+
+              <!-- Поле: Имя -->
+              <div class="form-group">
+                <label for="clientName" class="form-label">Ваше имя <span class="required-star">*</span></label>
+                <input 
+                  type="text" 
+                  id="clientName" 
+                  name="name" 
+                  class="form-input" 
+                  placeholder="Например: Алексей" 
+                  required 
+                  autocomplete="name"
+                >
+                <span class="form-error-msg" id="nameError"></span>
+              </div>
+
+              <!-- Поле: Телефон -->
+              <div class="form-group">
+                <label for="clientPhone" class="form-label">Телефон для связи <span class="required-star">*</span></label>
+                <input 
+                  type="tel" 
+                  id="clientPhone" 
+                  name="phone" 
+                  class="form-input" 
+                  placeholder="+7 (___) ___-__-__" 
+                  required 
+                  autocomplete="tel"
+                >
+                <span class="form-error-msg" id="phoneError"></span>
+              </div>
+
+              <!-- Поле: Марка и модель -->
+              <div class="form-group">
+                <label for="carModel" class="form-label">Марка и модель автомобиля <span class="required-star">*</span></label>
+                <input 
+                  type="text" 
+                  id="carModel" 
+                  name="carModel" 
+                  class="form-input" 
+                  placeholder="Например: BMW X5, Kia Rio, Toyota Camry" 
+                  required
+                >
+                <span class="form-error-msg" id="carError"></span>
+              </div>
+
+              <!-- Поле: Объём работы -->
+              <div class="form-group">
+                <label for="workVolume" class="form-label">Объём работы (пакет) <span class="required-star">*</span></label>
+                <select id="workVolume" name="workVolume" class="form-select" required>
+                  <option value="" disabled selected>— Выберите требуемый объём работ —</option>
+                  <option value="Локальная чистка (от 2 500 ₽)">Локальная чистка (от 2 500 ₽)</option>
+                  <option value="Комплекс Стандарт (от 7 500 ₽)">Комплекс «Стандарт» (от 7 500 ₽)</option>
+                  <option value="Полный комплекс + Потолок и озонация (от 11 500 ₽)">Полный комплекс + Потолок и озонация (от 11 500 ₽)</option>
+                  <option value="Уход за кожей с кондиционером (от 4 500 ₽)">Уход за кожей с кондиционером (от 4 500 ₽)</option>
+                  <option value="Предпродажная подготовка (от 6 500 ₽)">Предпродажная подготовка (от 6 500 ₽)</option>
+                  <option value="Нужна консультация по фото">Нужна консультация мастера по фото</option>
+                </select>
+                <span class="form-error-msg" id="serviceError"></span>
+              </div>
+
+              <!-- Поле: Дата и Время в сетке -->
+              <div class="form-row-grid">
+                <!-- Желаемая дата -->
+                <div class="form-group">
+                  <label for="bookingDate" class="form-label">Желаемая дата <span class="required-star">*</span></label>
+                  <input 
+                    type="date" 
+                    id="bookingDate" 
+                    name="bookingDate" 
+                    class="form-input" 
+                    required
+                  >
+                  <span class="form-error-msg" id="dateError"></span>
+                </div>
+
+                <!-- Удобное время -->
+                <div class="form-group">
+                  <label for="timeSlot" class="form-label">Удобное время <span class="required-star">*</span></label>
+                  <select id="timeSlot" name="timeSlot" class="form-select" required>
+                    <option value="" disabled selected>— Выберите интервал —</option>
+                    <option value="Утро (09:00 – 12:00)">Утро (09:00 – 12:00)</option>
+                    <option value="День (12:00 – 16:00)">День (12:00 – 16:00)</option>
+                    <option value="Вечер (16:00 – 20:00)">Вечер (16:00 – 20:00)</option>
+                    <option value="Оставить авто на ночь">Оставить авто на ночь</option>
+                  </select>
+                  <span class="form-error-msg" id="timeError"></span>
+                </div>
+              </div>
+
+              <!-- Кнопка отправки -->
+              <button type="submit" class="btn btn-primary btn-block submit-btn" id="submitBookingBtn">
+                <span class="btn-text">Забронировать время химчистки</span>
+              </button>
+
+              <div class="form-notice">
+                Нажимая кнопку, вы соглашаетесь на обработку персональных данных для расчета стоимости и резерва бокса.
+              </div>
+            </form>
+
+            <!-- Блок подтверждения успешной отправки (скрыт по умолчанию) -->
+            <div id="bookingSuccessBox" class="booking-result-box result-success" style="display: none;" role="status" aria-live="polite">
+              <div class="result-status-badge">[ СТАТУС: ЗАЯВКА ПРИНЯТА ]</div>
+              <h3 class="result-title">Время успешно забронировано!</h3>
+              <p class="result-text">
+                Мы зафиксировали параметры вашего заказ-наряда и передали дежурному мастеру детейлинг-бокса.
+              </p>
+
+              <div class="result-summary-card" id="resultSummaryContent">
+                <!-- Заполняется динамически из JS -->
+              </div>
+
+              <div class="result-actions">
+                <a href="https://t.me/avtolosk" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  Написать мастеру в Telegram
+                </a>
+                <a href="https://wa.me/74958421930" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                  Отправить фото в WhatsApp
+                </a>
+              </div>
+            </div>
+
+            <!-- Блок сообщения об ошибке сети (скрыт по умолчанию) -->
+            <div id="bookingErrorBox" class="booking-result-box result-error" style="display: none;" role="alert">
+              <div class="result-status-badge text-amber">[ ОШИБКА СОЕДИНЕНИЯ ]</div>
+              <h3 class="result-title">Не удалось передать заявку онлайн</h3>
+              <p class="result-text">
+                Произошла сетевая ошибка при связи с сервером. Пожалуйста, повторите попытку или отправьте заявку напрямую в Telegram/WhatsApp дежурного мастера:
+              </p>
+              <div class="result-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="retrySubmitBtn">Повторить попытку</button>
+                <a href="https://t.me/avtolosk" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                  Связаться в Telegram
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Подвал сайта (Footer) -->
+  <footer class="site-footer" id="contacts">
+    <div class="container footer-container">
+      
+      <div class="footer-grid">
+        <!-- Колонка 1: О студии -->
+        <div class="footer-col">
+          <div class="footer-logo">АВТОЛОСК // ДЕТЕЙЛИНГ</div>
+          <p class="footer-text">
+            Специализированная студия глубокой химчистки, реставрации кожи и антибактериальной дезинфекции салонов автомобилей в Москве.
+          </p>
+          <div class="footer-tech-tag">
+            <span>БОКС: Santoemma Sabrina • LeTech • Koch Chemie</span>
+          </div>
+        </div>
+
+        <!-- Колонка 2: Локация и время -->
+        <div class="footer-col">
+          <div class="footer-heading">Локация и график</div>
+          <address class="footer-address">
+            <span class="addr-line">Москва, ул. Автозаводская, 23А, стр. 4</span>
+            <span class="addr-sub">Боксы 12–14 (заезд с 1-го Кожуховского проезда)</span>
+            <span class="addr-hours">Режим работы: Ежедневно 09:00 – 21:00</span>
+          </address>
+        </div>
+
+        <!-- Колонка 3: Прямая связь -->
+        <div class="footer-col">
+          <div class="footer-heading">Контакты и мессенджеры</div>
+          <div class="footer-contacts">
+            <a href="tel:+74958421930" class="footer-phone-link">+7 (495) 842-19-30</a>
+            <div class="footer-messengers-row">
+              <a href="https://t.me/avtolosk" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                Telegram: @avtolosk
+              </a>
+              <a href="https://wa.me/74958421930" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+                WhatsApp: +7 (495) 842-19-30
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Юридические реквизиты и копирайт -->
+      <div class="footer-bottom-bar">
+        <div class="legal-info">
+          <span>ИП Смирнов А. В.</span>
+          <span>ОГРНИП 321774600189421</span>
+          <span>ИНН 772589140231</span>
+        </div>
+        <div class="copyright-info">
+          © 2026 Студия «АВТОЛОСК». Все права защищены.
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Модальное окно быстрой записи / расчета -->
+  <div class="modal-overlay" id="quickModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-badge">[ЭКСПРЕСС-ЗАПИСЬ]</span>
+          <h2 class="modal-title" id="modalTitle">Быстрый расчет и бронь бокса</h2>
+        </div>
+        <button type="button" class="modal-close-btn" id="closeModalBtn" aria-label="Закрыть модальное окно">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-lead">
+          Укажите контактные данные и модель автомобиля. Мы зафиксируем за вами скидку 10% на сушку турбофенами.
+        </p>
+
+        <form id="modalBookingForm" class="booking-form" novalidate>
+          <input type="text" name="website" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-group">
+            <label for="modalClientName" class="form-label">Ваше имя <span class="required-star">*</span></label>
+            <input type="text" id="modalClientName" name="name" class="form-input" placeholder="Алексей" required>
+            <span class="form-error-msg" id="modalNameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="modalClientPhone" class="form-label">Телефон <span class="required-star">*</span></label>
+            <input type="tel" id="modalClientPhone" name="phone" class="form-input" placeholder="+7 (___) ___-__-__" required>
+            <span class="form-error-msg" id="modalPhoneError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="modalCarModel" class="form-label">Автомобиль <span class="required-star">*</span></label>
+            <input type="text" id="modalCarModel" name="carModel" class="form-input" placeholder="BMW X5, Toyota Camry" required>
+            <span class="form-error-msg" id="modalCarError"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="modalWorkVolume" class="form-label">Пакет услуг</label>
+            <select id="modalWorkVolume" name="workVolume" class="form-select" required>
+              <option value="Комплекс Стандарт (от 7 500 ₽)">Комплекс «Стандарт» (от 7 500 ₽)</option>
+              <option value="Полный комплекс + Потолок и озонация (от 11 500 ₽)">Полный комплекс + Потолок и озонация (от 11 500 ₽)</option>
+              <option value="Локальная чистка (от 2 500 ₽)">Локальная чистка (от 2 500 ₽)</option>
+              <option value="Уход за кожей с кондиционером (от 4 500 ₽)">Уход за кожей с кондиционером (от 4 500 ₽)</option>
+              <option value="Предпродажная подготовка (от 6 500 ₽)">Предпродажная подготовка (от 6 500 ₽)</option>
+              <option value="Нужна консультация по фото">Нужна консультация по фото</option>
+            </select>
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="modalBookingDate" class="form-label">Дата</label>
+              <input type="date" id="modalBookingDate" name="bookingDate" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="modalTimeSlot" class="form-label">Время</label>
+              <select id="modalTimeSlot" name="timeSlot" class="form-select">
+                <option value="Утро (09:00 – 12:00)">Утро (09:00 – 12:00)</option>
+                <option value="День (12:00 – 16:00)" selected>День (12:00 – 16:00)</option>
+                <option value="Вечер (16:00 – 20:00)">Вечер (16:00 – 20:00)</option>
+                <option value="Оставить авто на ночь">Оставить авто на ночь</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block submit-btn" id="modalSubmitBtn">
+            <span class="btn-text">Отправить заявку</span>
+          </button>
+        </form>
+
+        <div id="modalSuccessBox" class="booking-result-box result-success" style="display: none;">
+          <div class="result-status-badge">[ ЗАЯВКА ПРИНЯТА ]</div>
+          <h3 class="result-title">Заявка успешно отправлена!</h3>
+          <p class="result-text">Мастер свяжется с вами для подтверждения времени в течение 10 минут.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Relative JavaScript -->
+  <script src="./script.js"></script>
+</body>
+</html>
