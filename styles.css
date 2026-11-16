@@ -1075,6 +1075,12 @@ ul, ol {
   background-color: #FFFFFF;
 }
 
+.form-select option:disabled {
+  color: var(--text-muted);
+  background-color: var(--bg-muted);
+  font-style: italic;
+}
+
 .form-input::placeholder {
   color: var(--text-muted);
 }

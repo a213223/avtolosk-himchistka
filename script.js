@@ -1,7 +1,10 @@
 /**
  * АВТОЛОСК // Клиентский скрипт управления лендингом
- * Нативный Vanilla JS: маска телефона, выбор пакетов, модальное окно,
- * валидация и отправка заявок в Cloudflare Worker -> Telegram.
+ * Нативный Vanilla JS:
+ * - Маска телефона
+ * - Выбор пакетов из прайс-листа
+ * - Проверка занятых слотов через GET ?date=YYYY-MM-DD
+ * - Отправка структурированного JSON в Cloudflare Worker -> Telegram
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==============================================================================
-  // 2. ОГРАНИЧЕНИЕ ВЫБОРА ПРОШЕДШИХ ДАТ (min = СЕГОДНЯ)
+  // 2. ОГРАНИЧЕНИЕ ВЫБОРА ДАТ (min = СЕГОДНЯ) И ПРОВЕРКА ЗАНЯТЫХ СЛОТОВ
   // ==============================================================================
   const today = new Date();
   const yyyy = today.getFullYear();
@@ -42,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const bookingDateInput = document.getElementById('bookingDate');
   const modalDateInput = document.getElementById('modalBookingDate');
+  const timeSlotSelect = document.getElementById('timeSlot');
+  const modalTimeSlotSelect = document.getElementById('modalTimeSlot');
 
   if (bookingDateInput) {
     bookingDateInput.min = todayStr;
@@ -52,13 +57,101 @@ document.addEventListener('DOMContentLoaded', () => {
     modalDateInput.value = todayStr;
   }
 
+  /**
+   * Запрашивает занятые слоты на выбранную дату с воркера и обновляет <select>
+   * @param {string} dateStr - Дата в формате YYYY-MM-DD
+   * @param {HTMLSelectElement} selectEl - Элемент выпадающего списка слотов
+   */
+  async function fetchAndApplyBusySlots(dateStr, selectEl) {
+    if (!dateStr || !selectEl) return;
+
+    const options = selectEl.querySelectorAll('option');
+
+    // Сохраняем исходный чистый текст опций в dataset
+    options.forEach(opt => {
+      if (opt.value && !opt.dataset.baseText) {
+        opt.dataset.baseText = opt.textContent.replace(/\s*—\s*\[Занято\]/g, '').trim();
+      }
+    });
+
+    try {
+      const url = `${WORKER_URL}?date=${encodeURIComponent(dateStr)}`;
+      const response = await fetch(url, { method: 'GET' });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error ${response.status}`);
+      }
+
+      const data = await response.json();
+      const busyList = Array.isArray(data.busy) ? data.busy : [];
+
+      let currentSelectedIsBusy = false;
+
+      options.forEach(opt => {
+        if (!opt.value) return; // Пропускаем placeholder "— Выберите интервал —"
+
+        const baseText = opt.dataset.baseText || opt.value;
+        const isBusy = busyList.includes(opt.value);
+
+        if (isBusy) {
+          opt.disabled = true;
+          opt.textContent = `${baseText} — [Занято]`;
+          if (selectEl.value === opt.value) {
+            currentSelectedIsBusy = true;
+          }
+        } else {
+          opt.disabled = false;
+          opt.textContent = baseText;
+        }
+      });
+
+      // Если текущий выбранный слот оказался занят, сбрасываем выбор
+      if (currentSelectedIsBusy) {
+        selectEl.value = '';
+      }
+
+    } catch (err) {
+      console.warn('Не удалось загрузить статус занятых слотов:', err);
+      // При сетевой ошибке возвращаем опции в активное состояние
+      options.forEach(opt => {
+        if (!opt.value) return;
+        const baseText = opt.dataset.baseText || opt.value;
+        opt.disabled = false;
+        opt.textContent = baseText;
+      });
+    }
+  }
+
+  // Обновление слотов при смене даты в основной форме
+  if (bookingDateInput && timeSlotSelect) {
+    bookingDateInput.addEventListener('change', () => {
+      fetchAndApplyBusySlots(bookingDateInput.value, timeSlotSelect);
+      if (modalDateInput) modalDateInput.value = bookingDateInput.value;
+      if (modalTimeSlotSelect) fetchAndApplyBusySlots(bookingDateInput.value, modalTimeSlotSelect);
+    });
+
+    // Загрузка слотов для сегодняшней даты по умолчанию
+    fetchAndApplyBusySlots(todayStr, timeSlotSelect);
+  }
+
+  // Обновление слотов при смене даты в модальной форме
+  if (modalDateInput && modalTimeSlotSelect) {
+    modalDateInput.addEventListener('change', () => {
+      fetchAndApplyBusySlots(modalDateInput.value, modalTimeSlotSelect);
+      if (bookingDateInput) bookingDateInput.value = modalDateInput.value;
+      if (timeSlotSelect) fetchAndApplyBusySlots(modalDateInput.value, timeSlotSelect);
+    });
+
+    fetchAndApplyBusySlots(todayStr, modalTimeSlotSelect);
+  }
+
   // ==============================================================================
   // 3. МАСКА ТЕЛЕФОНА (+7 (XXX) XXX-XX-XX)
   // ==============================================================================
   function setupPhoneMask(input) {
     if (!input) return;
 
-    input.addEventListener('input', (e) => {
+    input.addEventListener('input', () => {
       let value = input.value.replace(/\D/g, '');
       let formatted = '';
 
@@ -67,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Если вводят с 8 или 7, нормализуем
       if (['7', '8', '9'].includes(value[0])) {
         if (value[0] === '9') value = '7' + value;
         const firstDigit = '+7';
@@ -86,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
           formatted += '-' + value.substring(9, 11);
         }
       } else {
-        // Другие коды
         formatted = '+' + value.substring(0, 15);
       }
 
@@ -94,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     input.addEventListener('keydown', (e) => {
-      // Очистка при Backspace на пустом вводе
       if (e.key === 'Backspace' && input.value.replace(/\D/g, '').length <= 1) {
         input.value = '';
       }
@@ -131,12 +221,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetPackage && workVolumeSelect) {
         workVolumeSelect.value = targetPackage;
 
-        // Плавная прокрутка к форме записи
         const bookingSection = document.getElementById('booking');
         if (bookingSection) {
           bookingSection.scrollIntoView({ behavior: 'smooth' });
-
-          // Фокус на поле модели авто
           const carInput = document.getElementById('carModel');
           if (carInput) {
             setTimeout(() => carInput.focus(), 600);
@@ -164,6 +251,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = 'hidden';
     const firstInput = document.getElementById('modalClientName');
     if (firstInput) setTimeout(() => firstInput.focus(), 100);
+
+    // Синхронизируем слоты в модалке при открытии
+    if (modalDateInput && modalTimeSlotSelect) {
+      fetchAndApplyBusySlots(modalDateInput.value || todayStr, modalTimeSlotSelect);
+    }
   }
 
   function closeModal() {
@@ -194,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function handleFormSubmit(form, isModal = false) {
     const errorPrefix = isModal ? 'modal' : '';
 
-    // Сброс ошибок
+    // Сброс сообщений об ошибках
     const errorElements = form.querySelectorAll('.form-error-msg');
     errorElements.forEach(el => el.textContent = '');
 
@@ -242,26 +334,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (err) err.textContent = 'Выберите требуемый пакет услуг';
     }
 
+    if (!bookingDate) {
+      isValid = false;
+      const err = form.querySelector(`#${errorPrefix ? 'modalDateError' : 'dateError'}`);
+      if (err) err.textContent = 'Выберите дату химчистки';
+    }
+
+    if (!timeSlot) {
+      isValid = false;
+      const err = form.querySelector(`#${errorPrefix ? 'modalTimeError' : 'timeError'}`);
+      if (err) err.textContent = 'Выберите удобный свободный интервал';
+    }
+
     if (!isValid) return;
 
     // 2. Проверка Honeypot ловушки от ботов
     if (honeypotInput && honeypotInput.value.trim() !== '') {
-      // Бот попался: имитируем мгновенный успех без отправки запроса
-      showSuccess(form, { name, phone, carModel, workVolume, bookingDate, timeSlot }, isModal);
+      showSuccess(form, { name, phone, car: carModel, service: workVolume, date: bookingDate, time: timeSlot }, isModal);
       return;
     }
 
-    // 3. Форматирование поля service для воркера
-    // Пример: "Комплекс «Стандарт» | Авто: BMW X5 | Дата: 2026-11-18 (День (12:00 – 16:00))"
-    const formattedService = `${workVolume} | Авто: ${carModel} | Дата: ${bookingDate} (${timeSlot})`;
-
+    // 3. Структурированный JSON по спецификации:
+    // { "name": имя, "phone": телефон, "car": марка_и_модель, "service": объём_работ, "date": выбранная_дата, "time": выбранный_слот }
     const payload = {
       name: name,
       phone: phone,
-      service: formattedService
+      car: carModel,
+      service: workVolume,
+      date: bookingDate,
+      time: timeSlot
     };
 
-    // Блокировка кнопки
+    // Блокировка кнопки на время отправки
     const btnTextEl = submitBtn ? submitBtn.querySelector('.btn-text') : null;
     const originalBtnText = btnTextEl ? btnTextEl.textContent : 'Отправить';
     if (submitBtn) {
@@ -285,7 +389,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json().catch(() => ({ ok: true }));
 
       if (data && data.ok) {
-        showSuccess(form, { name, phone, carModel, workVolume, bookingDate, timeSlot }, isModal);
+        showSuccess(form, payload, isModal);
+
+        // Обновляем статус слотов после успешной отправки
+        if (bookingDateInput && timeSlotSelect) {
+          fetchAndApplyBusySlots(bookingDate, timeSlotSelect);
+        }
+        if (modalDateInput && modalTimeSlotSelect) {
+          fetchAndApplyBusySlots(bookingDate, modalTimeSlotSelect);
+        }
       } else {
         throw new Error('Worker response not ok');
       }
@@ -332,15 +444,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="summary-row">
             <span class="summary-label">Автомобиль:</span>
-            <span class="summary-val">${escapeHtml(data.carModel)}</span>
+            <span class="summary-val">${escapeHtml(data.car)}</span>
           </div>
           <div class="summary-row">
             <span class="summary-label">Пакет услуг:</span>
-            <span class="summary-val">${escapeHtml(data.workVolume)}</span>
+            <span class="summary-val">${escapeHtml(data.service)}</span>
           </div>
           <div class="summary-row">
             <span class="summary-label">Дата и интервал:</span>
-            <span class="summary-val">${escapeHtml(data.bookingDate)} (${escapeHtml(data.timeSlot)})</span>
+            <span class="summary-val">${escapeHtml(data.date)} (${escapeHtml(data.time)})</span>
           </div>
           <div class="summary-row">
             <span class="summary-label">Сушка турбофенами:</span>

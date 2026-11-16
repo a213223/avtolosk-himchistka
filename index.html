@@ -812,13 +812,15 @@
               <input type="date" id="modalBookingDate" name="bookingDate" class="form-input" required>
             </div>
             <div class="form-group">
-              <label for="modalTimeSlot" class="form-label">Время</label>
-              <select id="modalTimeSlot" name="timeSlot" class="form-select">
+              <label for="modalTimeSlot" class="form-label">Время <span class="required-star">*</span></label>
+              <select id="modalTimeSlot" name="timeSlot" class="form-select" required>
+                <option value="" disabled selected>— Выберите интервал —</option>
                 <option value="Утро (09:00 – 12:00)">Утро (09:00 – 12:00)</option>
-                <option value="День (12:00 – 16:00)" selected>День (12:00 – 16:00)</option>
+                <option value="День (12:00 – 16:00)">День (12:00 – 16:00)</option>
                 <option value="Вечер (16:00 – 20:00)">Вечер (16:00 – 20:00)</option>
                 <option value="Оставить авто на ночь">Оставить авто на ночь</option>
               </select>
+              <span class="form-error-msg" id="modalTimeError"></span>
             </div>
           </div>
 
