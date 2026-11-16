@@ -362,15 +362,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 2. Проверка Honeypot ловушки от ботов
+    const phoneClean = phone.replace(/\+/g, '').trim();
     if (honeypotInput && honeypotInput.value.trim() !== '') {
-      showSuccess(form, { name, phone, car: carModel, service: workVolume, date: bookingDate, time: timeSlot }, isModal);
+      showSuccess(form, { name, phone: phoneClean, car: carModel, service: workVolume, date: bookingDate, time: timeSlot }, isModal);
       return;
     }
 
-    // 3. Структурированный JSON СТРОГО из 6 отдельных полей (без склеек в service):
+    // 3. Структурированный JSON СТРОГО из 6 отдельных полей (номер телефона без знака "+"):
     const payload = {
       name: name,
-      phone: phone,
+      phone: phoneClean,
       car: carModel,
       service: workVolume,
       date: bookingDate,
